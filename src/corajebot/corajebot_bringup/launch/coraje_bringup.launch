@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="paused"       default="false" />
+	<arg name="use_sim_time" default="true" />
+	<arg name="gui"          default="true" />
+	<arg name="headless"     default="false" />
+	<arg name="debug"        default="false" />
+    <arg name="worldname"    default="lab"/>
+
+	<arg name="camera_name"		default="/camera/color" />
+	<arg name="image_topic"     default="image_raw" />
+	<arg name="camera_frame"	default="camera_depth_optical_frame" />
+
+    <include file="$(find p3dx_gazebo)/launch/gazebo.launch" >
+		<arg name="debug"        value="$(arg debug)" />
+		<arg name="gui"          value="$(arg gui)" />
+		<arg name="paused"       value="$(arg paused)" />
+		<arg name="use_sim_time" value="$(arg use_sim_time)" />
+		<arg name="headless"     value="$(arg headless)" />
+        <arg name="worldname"   value="$(find corajebot_gazebo)/worlds/$(arg worldname).world"/>  
+    </include>
+
+	<include file="$(find corajebot_slam)/launch/navigation/navigation.launch"/>
+
+	<node pkg="openni_camera" type="openni_node" name="openni_camera" output="screen" respawn="true" >
+		<param name="device_type" value="1" />
+		<param name="registration_type" value="1" />
+		<param name="point_cloud_resolution" value="1" />
+		<param name="openni_depth_optical_frame" value="kinect_depth_optical_frame" />
+		<param name="openni_rgb_optical_frame" value="kinect_rgb_optical_frame" />
+		<param name="image_input_format" value="5" />
+  	</node>
+
+	<include file="$(find corajebot_bringup)/launch/apriltag_detection.launch" >
+		<arg name="camera_name"		value="$(arg camera_name)" />
+		<arg name="image_topic"		value="$(arg image_topic)" />
+		<arg name="camera_frame"	value="$(arg camera_frame)" />
+	</include>
+
+</launch>

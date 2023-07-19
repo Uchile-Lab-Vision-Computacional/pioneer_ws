@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Arguments -->
+    <arg name="move_forward_only" default="true"/>
+    <arg name="map_name"          default="lab"/>
+    <arg name="cmd_vel_topic"     default="/p3dx/cmd_vel" />
+    <arg name="odom_topic"        default="/p3dx/odom" />
+  
+    <!-- Localization -->
+    <include file="$(find corajebot_slam)/launch/localization/localization.launch">
+        <arg name="map_file" value="$(arg map_name)"/>
+    </include>
+    
+    <!-- move_base -->
+    <include file="$(find corajebot_slam)/launch/navigation/move_base.launch">
+        <arg name="move_forward_only" value="$(arg move_forward_only)"/>
+        <arg name="odom_topic"        value="$(arg odom_topic)"/>
+        <arg name="cmd_vel_topic"     value="$(arg cmd_vel_topic)"/>
+    </include>
+</launch>
