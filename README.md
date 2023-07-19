@@ -2,7 +2,7 @@
 
 ######  Por Eduardo Jorquera & Ignacio Dassori - Otoño 2023
 
-Este repositorio incluye el ROS workspace utilizado para controlar el robot diferencial Pioneer P3-DX disponible en el laboratorio de Visión Computacional del Departamento de Ingeniería eléctrica de la Universidad de Chile.
+Este repositorio incluye el workspace de ROS utilizado para controlar el robot diferencial Pioneer P3-DX disponible en el laboratorio de Visión Computacional del Departamento de Ingeniería eléctrica de la Universidad de Chile.
  
  
 ## Instalación
